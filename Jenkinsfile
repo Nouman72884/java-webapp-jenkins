@@ -27,16 +27,16 @@ pipeline {
                 //sh 'mvn -B -DskipTests clean package'
             }
         }
-        stage('Test') {
-            steps {
-                sh 'mvn test'
-            }
-            post {
-                always {
-                    junit 'target/surefire-reports/*.xml'
-                }
-            }
-        }
+        // stage('Test') {
+        //     steps {
+        //         sh 'mvn test'
+        //     }
+        //     post {
+        //         always {
+        //             junit 'target/surefire-reports/*.xml'
+        //         }
+        //     }
+        // }
         // stage('Deliver') {
         //     steps {
         //         script {
@@ -46,30 +46,30 @@ pipeline {
         //     }
         // }
         // }
-        stage('Test Path') {
-            steps {
-                sh 'pwd'
-                sh 'ls target/'
-            }
-        }
-        stage ('Publish Artifacts') {
-        steps {
-            rtUpload (
-                buildName: JOB_NAME,
-                buildNumber: BUILD_NUMBER,
-                serverId: "artifactory", // Obtain an Artifactory server instance, defined in Jenkins --> Manage:
-                spec: """{
-                            "files": [
-                                {
-                                    "pattern": "target/my-app-1.0-SNAPSHOT.jar",
-                                    "target": "maven_local/my-app-1.0-SNAPSHOT.${BUILD_NUMBER}.jar",
-                                    "recursive": "true"
-                                }
-                            ]
-                    }"""   
-                )
-        }
-     } 
+        // stage('Test Path') {
+        //     steps {
+        //         sh 'pwd'
+        //         sh 'ls target/'
+        //     }
+        // }
+    //     stage ('Publish Artifacts') {
+    //     steps {
+    //         rtUpload (
+    //             buildName: JOB_NAME,
+    //             buildNumber: BUILD_NUMBER,
+    //             serverId: "artifactory", // Obtain an Artifactory server instance, defined in Jenkins --> Manage:
+    //             spec: """{
+    //                         "files": [
+    //                             {
+    //                                 "pattern": "target/my-app-1.0-SNAPSHOT.jar",
+    //                                 "target": "maven_local/my-app-1.0-SNAPSHOT.${BUILD_NUMBER}.jar",
+    //                                 "recursive": "true"
+    //                             }
+    //                         ]
+    //                 }"""   
+    //             )
+    //     }
+    //  } 
     
     //  stage ('pull artifact') {
     //     steps{
